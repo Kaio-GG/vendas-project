@@ -1,0 +1,89 @@
+.pg-analise{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #161515;
+    flex-direction: column;
+    color: #fff;
+    font-family: 'regular';
+        .header{
+            height: 10vh;
+            width: 100%;
+        }
+        .meio{
+            display: flex;
+            flex-direction: row;
+        }
+        .fundo{
+            display: flex;
+            width: 95%;
+            height: 90vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .form{
+            flex-direction: column;
+            width: 100%;
+            display: flex;
+            border-radius: 10px;
+            height: 70%;
+        }
+        .formulario{
+            height: 100%;
+            width: 90%;
+        }
+        .btns{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-top: 20px;   
+        button{
+            background-color: #48014e;
+            border: none;
+            color:  #ffff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        }
+        .linha-vertical{
+            height: 50%;
+            width: 1%;
+            margin-right: 10px;
+            border-radius: 50px;
+            background-color: #48014e;
+        }
+        
+        .linha-nome{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 80px;
+            margin-top: 10px;
+        }
+        .org-info{
+            display: flex;
+            background-color: #313131;
+            height: 100%;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 5px ;
+            flex-direction: column;
+            .info{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 20%;
+                border-bottom: 5px solid #48014e;
+            }
+        }
+        h2{
+            font-family: 'regular'
+        }
+        p{
+            font-family: "medio";
+          }
+          
+    }

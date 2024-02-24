@@ -1,0 +1,48 @@
+
+
+.maisVendido{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    table{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        header{
+            display: flex;
+            width: 100%;
+        }
+        tr{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+        th{
+            width: 23%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+ 
+        }
+        tbody{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+        }
+        thead{
+            padding: 10px;
+            display: flex;
+            width: 100%;
+            background-color: #1f1e1f;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        td{
+            width: 23%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+    }
+}

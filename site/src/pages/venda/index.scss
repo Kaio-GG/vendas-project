@@ -1,0 +1,198 @@
+.pg-Analise{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #161515;
+    flex-direction: column;
+    color: #fff;
+    h2{
+        font-family: "regular";
+    }
+    .header{
+        height: 10vh;
+        width: 100%;
+    }
+    .meio{
+        display: flex;
+        flex-direction: row;
+    }
+    .org-div-textarea{
+        display: flex;
+        flex-direction: column;
+        height: 52%;
+        justify-content: space-between;
+    }
+    .fundo{
+        display: flex;
+        width: 95%;
+        height: 90vh;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .form{
+        height: 80vh;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background: transparent;
+        align-items: center;
+    }
+    .formulario{
+        height: 100%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+    .linha-horizontal{
+        width: 90%;
+        height: 1%;
+        background-color: #48014e;
+        border-radius: 50px;
+    }
+
+    .linha-vertical{
+        height: 50%;
+        width: 1%;
+        margin-right: 10px;
+        border-radius: 50px;
+        background-color: #48014e;
+    }
+    .linha-nome{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 80px;
+        margin-top: 10px;
+    }
+    .input {
+        color: #48014e;
+        border: 2px solid #48014e;
+        border-radius: 5px;
+        padding: 10px 25px;
+        background: transparent;
+        max-width: 200px;
+        min-width: 200px;
+        color: #fff;
+        color-scheme: white;
+       }
+        
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        input[type="date"]:focus {
+            background-color: transparent;
+        }
+
+    .inputs{
+        width: 88%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 10px;
+       }
+    .textos{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 88%;
+        height: 40%;
+    }
+    .botao-salvar{
+        display: flex;
+        width: 95%;
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
+    textarea{
+        max-height: 100px;
+        min-height: 100px;
+        max-width: 200px;
+        min-width: 200px;
+    }
+    .button {
+        --color: #63096B;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 100px;
+        padding: 0.8em 1.7em;
+        background-color: transparent;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: .5s;
+        font-weight: 400;
+        font-size: 17px;
+        border: 1px solid;
+        font-family: inherit;
+        text-transform: uppercase;
+        color: var(--color);
+        z-index: 1;
+       }
+       
+       .button::before, .button::after {
+        content: '';
+        width: 10px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        border-radius: 50%;
+        z-index: -1;
+        background-color: var(--color);
+        transition: 1s ease;
+       }
+       
+       .button::before {
+        top: -1em;
+        left: -1em;
+       }
+       
+       .button::after {
+        left: calc(100% + 1em);
+        top: calc(100% + 1em);
+       }
+       
+       .button:hover::before, .button:hover::after {
+        height: 410px;
+        width: 410px;
+       }
+       
+       .button:hover {
+        color: #fff;
+       }
+       .button:active {
+        filter: brightness(.8);
+       }       
+       .historico{
+           display: flex;
+           flex-direction: column;
+           justify-content: flex-start;
+           height: 29%;
+           width: 90%;
+        }
+        h4{
+            margin-left: 20px;
+        }
+        .lista{
+             display: flex;
+             flex-direction: column;
+             justify-content: flex-start;
+             align-items: flex-start;
+             width: 90%;
+        }
+       .venda{
+            display: flex;
+            flex-direction: row;
+            width: 99%;
+            align-items: center;
+            justify-content: space-around;
+            height: 50px;
+       }
+}

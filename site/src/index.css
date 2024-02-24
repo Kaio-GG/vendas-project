@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: "Roboto-regular";
+  src: url(../public/assets/font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: "Roboto-bold";
+  src: url(../public/assets/font/Roboto-Black.ttf);
+}
+@font-face {
+  font-family: "Roboto-medio";
+  src: url(../public/assets/font/Roboto-Medium.ttf);
+}
+@font-face {
+  font-family: "regular";
+  src: url(../public/assets/font/Kumbh_Sans/KumbhSans-SemiBold.ttf);
+}
+@font-face {
+  font-family: "medio";
+  src: url(../public/assets/font/Kumbh_Sans/KumbhSans-Medium.ttf);
+}
+
+p{
+  font-family: "medio";
+}
+
+

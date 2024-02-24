@@ -1,0 +1,17 @@
+
+
+.cp-header{
+    display: flex;
+    width: 95%;
+    height: 10vh;
+    background-color:  #161515;
+    color: #ffff;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    h2{
+        font-family: "Roboto-bold";
+    }
+}

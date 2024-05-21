@@ -1,5 +1,6 @@
 import './index.scss';
 import { useParams, useNavigate } from 'react-router-dom';
+import storage from 'local-storage';
 
 
 
@@ -7,17 +8,18 @@ export default function Navegacao(){
 
     const { tela } =useParams();
     const Navigate = useNavigate()
+    const id = storage('usuario').id
 
 
     function navegar(navi){
         if (navi === 1) {
-            Navigate('/novo/venda/1')
+            Navigate(`/novo/venda/1/${id}`)
         }else if( navi === 2){
-            Navigate('/novo/produto/2')
+            Navigate(`/produto/2/${id}/novo`)
         }else if( navi === 3){
-            Navigate('/produto/3')
+            Navigate(`/produtos/3/${id}`)
         }else if(navi === 4){
-            Navigate('/analise/4')
+            Navigate(`/analise/4/${id}`)
         }
     }
 

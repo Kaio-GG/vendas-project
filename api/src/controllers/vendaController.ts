@@ -9,8 +9,8 @@ const server = Router();
 server.post('/novo/venda', async (req:Request, res:Response) =>{
     try {
         const {idProduto, idUsuario, desconto, data, descricao, qtd} = req.body;
-        const respostaBD = await novaVenda(idProduto, idUsuario, desconto, data, descricao, qtd);
-        let msg = '';
+        const respostaBD:any = await novaVenda(idProduto, idUsuario, desconto, data, descricao, qtd);
+        let msg:string = '';
         if(!respostaBD){
             msg = "Ocorreu um erro inesperado"
         }else if( 'affectedRows' in respostaBD){
@@ -29,8 +29,8 @@ server.post('/novo/venda', async (req:Request, res:Response) =>{
 server.delete('/deletar/venda/:id', async (req:Request, res:Response) =>{
     try {
         const {id} = req.params;
-        const respostaBD = await deletarVenda(Number(id));
-        let msg = '';
+        const respostaBD:any= await deletarVenda(Number(id));
+        let msg:string= '';
         if(!respostaBD){
             msg = "Ocorreu um erro inesperado"
         }else if( 'affectedRows' in respostaBD){

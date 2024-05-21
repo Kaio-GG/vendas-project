@@ -46,14 +46,19 @@
             margin-top: 10px;
         }
         .input {
-            color: #48014e;
+            color: #ffffff;
             border: 2px solid #48014e;
             border-radius: 5px;
             padding: 10px 25px;
             background: transparent;
             max-width: 200px;
             min-width: 200px;
+            appearance: none;
            }
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
         .inputs{
             width: 88%;
             display: flex;
@@ -65,8 +70,8 @@
         .textos{
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
-            width: 60%;
+            justify-content: center;
+            width: 33%;
             height: 40%;
         }
         .botao-salvar{

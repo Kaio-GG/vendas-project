@@ -1,4 +1,4 @@
-.pg-Analise{
+.pg-venda{
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -79,7 +79,16 @@
         color: #fff;
         color-scheme: white;
        }
-        
+
+       .opcao-produto{
+        width: 400px;
+       }
+       option{
+        background-color: #161515;
+        color: #fff;
+        border: none;
+        border-radius: 2px;
+       }
         input[type="date"]::-webkit-calendar-picker-indicator {
             display: none;
         }
@@ -95,6 +104,8 @@
         align-items: center;
         margin-top: 10px;
        }
+
+    
     .textos{
         display: flex;
         align-items: center;

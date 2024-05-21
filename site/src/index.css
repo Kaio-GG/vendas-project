@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #161515;
 }
 
 code {
@@ -38,3 +39,20 @@ p{
 }
 
 
+   /* Estilizando a barra de rolagem */
+   ::-webkit-scrollbar {
+    width: 8px; /* largura da barra de rolagem */
+    min-height: 10px; /* altura da barra de rolagem */
+    max-height: 10px;
+}
+
+/* Estilizando o polegar da barra de rolagem */
+::-webkit-scrollbar-thumb {
+    background-color: #272727; /* cor do polegar */
+    border-radius: 6px; /* borda arredondada */
+}
+
+/* Estilizando a barra de rolagem ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* cor do polegar ao passar o mouse */
+}

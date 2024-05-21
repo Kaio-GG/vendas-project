@@ -1,7 +1,6 @@
 .pg-produto{
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     background-color: #161515;
     flex-direction: column;
     color: #fff;
@@ -47,7 +46,11 @@
     .org-produtos{
         margin-top: 30px;
         display: flex;
-        width: 90%;
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: flex-start;
     }
     .card {
         --background: linear-gradient(to left, #63096B 0%, #48014e 100%);
@@ -56,6 +59,8 @@
         padding: 5px;
         border-radius: 1rem;
         background: var(--background);
+        margin-top: 3vh;
+        margin-right: 1vw;
        }
        .card-info {
         --color: #181818;
@@ -105,7 +110,4 @@
                 transition: all 0.15s;
             }
         }   
-           
-      
-
 }

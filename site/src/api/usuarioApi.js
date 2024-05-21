@@ -5,10 +5,9 @@ import api from './conection.js';
 export async function login(email, senha){
     try {
         const resp = await api.post('/login',{
-            email: email,
-            senha: senha
+            "email": email,
+            "senha": senha
         } )
-
         return resp
     } catch (err) {
         console.log(err)

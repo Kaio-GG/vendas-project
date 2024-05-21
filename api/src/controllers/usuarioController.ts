@@ -6,10 +6,15 @@ const server = Router();
 server.post("/login", async (req: Request, res: Response) => {
     try {
         const { senha, email } = req.body;
+        
+        console.log(email)
         if (!email || !senha ) {
             return res.status(400).json({ message: "Todos os campos são obrigatórios." });
         }
-        const resultado = await login(email, senha);
+        const resultado:any = await login(email, senha);
+        if(!resultado){
+            return res.status(202).json({mesage:" usuario pu senha invalidos" })
+        }
         return res.status(200).json(resultado);
     } catch (error) {
         console.error("Erro:", error);
@@ -23,7 +28,7 @@ server.post('/cadastro', async (req:Request, res:Response) => {
         if(!nome || !email || !senha){
             return res.status(400).json('Preencha todos os campos')
         }
-        const resultado = await cadastro( nome, email, senha);
+        const resultado:any = await cadastro( nome, email, senha);
         return res.status(200).json({
             resultado
         })

@@ -34,7 +34,7 @@ export default function Produto(){
                             <h2>Produtos</h2>
                         </div>
                     <div className='org-produtos'>
-                        {Array.isArray(produto) && produto.length > 0 && produto.map((prod) =>(
+                        {Array.isArray(produto) && produto.length > 0 ? produto.map((prod) =>(
                     
                         <div class="card">
                             <div class="card-info">
@@ -54,7 +54,13 @@ export default function Produto(){
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )):
+                        <div className='divimg'>
+                            <img className='imgNotFound' src='/assets/image/notFound.svg' alt='' />
+
+                        </div>
+                    
+                    }
 
                     </div>
                 </div>

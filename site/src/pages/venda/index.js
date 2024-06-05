@@ -12,30 +12,33 @@ export default function Venda(){
     const [data, setData] = useState('');
     const [produto, setProduto] = useState([]);
     const [valor, setValor] = useState('');
+    const [valorOriginal, setValorOriginal] = useState('');
     const [qtd, setQtd] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [descEspecifico, setDescEspecifico] = useState('');
     const [desconto, setDesconto] = useState('');
-    const [pos, setPos] = useState([])
-    const [produtoSelecionado, setProdutoSelecionado] = useState([])
-    const [idProduto, setIdProduto] = useState([])
-
+    const [pos, setPos] = useState([]);
+    const [produtoSelecionado, setProdutoSelecionado] = useState([]);
+   
     const {id} = useParams()
 
     async function vendaNovo(){
         try {
             let quantidade = 0
+            let gastoTotal = 0
+            let liquidoTotal = 0
             if(!desconto || !qtd){
                 if (!desconto) {
                     setDesconto(0)
                 }
-                if(qtd <= 0){
-                    quantidade = 1
-                }else{
-                    quantidade = Number(qtd);
-                }
             }
-            const r = await novaVenda( Number(idProduto[2]), id, Number(desconto), data, descricao, quantidade)
+            if(qtd <= 0){
+                quantidade = 1
+            }else{
+                quantidade = qtd;
+                gastoTotal = produto[pos[0]].gasto * qtd
+                liquidoTotal = produto[pos[0]].liquido * qtd
+            }
+            const r = await novaVenda( id, Number(desconto), data, descricao, quantidade , produto[pos[0]].nome, valor, gastoTotal, liquidoTotal)
             toast(r.data)            
         } catch (err) {
             console.log(err.message)
@@ -44,8 +47,10 @@ export default function Venda(){
     
     function carregarValor(){
         if(produto.length > 0){
-            setValor(produto[pos[0]].valor)
-            setDescricao(produto[pos[0]].descricao)
+            const valorProduto = produto[pos[0]].valor;
+            setValor(valorProduto);
+            setValorOriginal(valorProduto);
+            setDescricao(produto[pos[0]].descricao);
         }
     }
     
@@ -54,7 +59,8 @@ export default function Venda(){
         
         async function carregarProduto() {
             const r = await carregarProdutoApi(id);
-            setProduto(r)
+            setProduto(r);
+            console.log(produto)
         }
     
         carregarProduto();
@@ -64,6 +70,43 @@ export default function Venda(){
     useEffect(() => {
         carregarValor()
     },[pos])
+
+    useEffect(() => {
+        let novoValor = 0
+        if (qtd && qtd > 0) {
+            novoValor = (valorOriginal * qtd).toFixed(2);
+        }
+        
+        if (desconto && desconto > 0) {
+            const valorComDesconto = (novoValor - ((desconto / 100) * novoValor)).toFixed(2);
+            setValor(valorComDesconto);
+            return
+        }
+        
+        if(!qtd){
+            setValor(valorOriginal)
+            return
+        }
+        setValor(novoValor);
+    },[qtd, valorOriginal])
+    
+    useEffect(() =>{
+        if (desconto && desconto > 0 && !qtd ) {
+            const valorComDesconto = (valorOriginal - ((desconto / 100) * valorOriginal)).toFixed(2);
+            setValor(valorComDesconto);
+        } else if(desconto && desconto > 0 && qtd) {
+            const valorComDesconto = ((valorOriginal * qtd ) - ((desconto / 100) * (valorOriginal * qtd ))).toFixed(2);
+            setValor(valorComDesconto);
+        }else if(qtd){
+            setValor((valorOriginal*qtd))
+        }else{
+            setValor(valorOriginal)
+        }
+
+    },[desconto, valorOriginal])
+
+    
+
     return(
         <main className='pg-venda'>
             <section className='header'>
@@ -87,7 +130,6 @@ export default function Venda(){
                             value={produtoSelecionado || ''}
                             onChange={(e) => {
                                 setPos(e.target.value);
-                                setIdProduto(e.target.value)
                                 setProdutoSelecionado(e.target.value);
                             }}
                         >
@@ -97,21 +139,53 @@ export default function Venda(){
                             ))}
                         </select>
                             
-                                <input type="number" name="text" min='0' class="input" placeholder="Valor da venda" value={valor} />
-                                <input type="number" name="text" min='1' class="input" placeholder="Quantidade de vendas" value={qtd} onChange={e => setQtd(e.target.value)}/>
+                                <input 
+                                    type="number" 
+                                    name="text" 
+                                    min='0' 
+                                    step='.01' 
+                                    className="input" 
+                                    placeholder="Valor da venda" 
+                                    value={valor} 
+                                    onChange={e => setValor(parseFloat(e.target.value).toFixed(2))} 
+                                />
+                                <input 
+                                    type="number" 
+                                    name="text" 
+                                    min='1' 
+                                    className="input" 
+                                    placeholder="Quantidade de vendas" 
+                                    value={qtd} 
+                                    onChange={e => setQtd(e.target.value)} 
+                                />
                             
                         </div>
                         
                         <div className='textos'>
-                            <textarea type="" name="text" class="input" placeholder="O que é esse produto ou serviço" value={descricao} />
-                            <textarea type="text" name="text" class="input" placeholder="explicação especifica dessa venda(não obrigatorio)" value={descEspecifico} onChange={e => setDescEspecifico(e.target.value)}/>
+                            <textarea type="" name="text" className="input" placeholder="O que é esse produto ou serviço" value={descricao} />
                             <div className='org-div-textarea'>
-                                <input type="number" name="text" min='0' class="input" placeholder="Desconto em %" value={desconto} onChange={e => setDesconto(e.target.value)}/>
-                                <input type="date" name="text" class="input" placeholder="Data da venda"  value={data} onChange={e => setData(e.target.value)}/>
+                                <input 
+                                    type="number" 
+                                    name="text" 
+                                    min='0' 
+                                    max="100" 
+                                    className="input" 
+                                    placeholder="Desconto em %" 
+                                    value={desconto} 
+                                    onChange={e => setDesconto(e.target.value)} 
+                                />
+                                <input 
+                                    type="date" 
+                                    name="text" 
+                                    className="input" 
+                                    placeholder="Data da venda"  
+                                    value={data} 
+                                    onChange={e => setData(e.target.value)} 
+                                />
                             </div>
                         </div>
                         <div className='botao-salvar'>
-                            <button class="button" onClick={vendaNovo}> Salvar </button>
+                            <button className="button" onClick={vendaNovo}> Salvar </button>
                         </div>
                     </div>
                         

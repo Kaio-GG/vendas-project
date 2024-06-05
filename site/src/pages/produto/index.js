@@ -1,10 +1,12 @@
 import './index.scss';
 import Header from '../../components/header/index.js';
 import Navegacao from '../../components/navegacao/index.js';
+import Confirmar from '../../components/confirmarExclusao/index.jsx';
 import { useEffect, useState } from 'react';
-import { criarProduto, alterarProduto, carregarProdutoApi } from '../../api/produto.js';
-import { useParams } from 'react-router-dom';
+import { criarProduto, alterarProduto, carregarProdutoApi, deletarProdutoApi } from '../../api/produto.js';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
+import LoadingBar from 'react-top-loading-bar'
 
 
 export default function NovoProduto(){
@@ -13,18 +15,24 @@ export default function NovoProduto(){
     const [descricao, setDescricao] = useState('');
     const [liquido, setLiquido] = useState('');
     const [gasto, setGasto] = useState('');
+    const [confirmado, setConfirmado] = useState(null)
+    const [progress, setProgress]= useState(0)
 
     const {id} = useParams()
     const {produtoid} = useParams()
-
+    const Navigate = useNavigate('')
     async function cadastrarProduto(){
         try {
-            if(!id || !nome || !Number(valor) || !Number(gasto) || !Number(liquido) || !descricao){
+            if(!id || !nome || !Number(valor) || !Number(liquido) || !descricao || Number(gasto) < 0 ){
                 toast.error("Preercha todos os campos");
                 return
             }
             let r = await criarProduto(id , nome , Number(valor) , Number(gasto) , Number(liquido), descricao);
             toast(r.data)
+            setProgress(100)
+            setTimeout(() => {
+                Navigate(`/novo/venda/1/${id}`)            
+            }, 900);
         } catch (err) {
             console.log(err)
         }
@@ -37,7 +45,18 @@ export default function NovoProduto(){
             console.log(err)
         }
     }
-
+    async function deletarProduto(){
+        try {
+            const r = await deletarProdutoApi(produtoid);
+            toast(r)
+            setProgress(100)
+            setTimeout(() => {
+                Navigate(`/novo/venda/1/${id}`)            
+            }, 900);
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     function formatarDinheiro (valor) {
         
@@ -76,8 +95,21 @@ export default function NovoProduto(){
             }
         carregarProduto()
     },[produtoid])
+
+    function abriExcluir(){
+        setConfirmado(true)
+    }
+    function fecharExcluir(){
+        setConfirmado(null)
+    }
+
     return(
         <main className='pg-novoProduto'>
+            <LoadingBar
+            color='#f11946'
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+            />
              <section className='header'>
                 <Header/>
             </section>
@@ -120,11 +152,19 @@ export default function NovoProduto(){
                             </div>
                             <div className='botao-salvar'>
                                 <h4>Valor líquido recebido por venda: {formatarDinheiro(liquido)}</h4>
-                                <button className="button" onClick={()=>salvarAlteracao()}>Salvar</button>
+                                <div className='div-btns'>
+                                    <button className="button" onClick={()=> abriExcluir()}>Deletar</button>
+                                    <button className="button" onClick={()=>salvarAlteracao()}>Salvar</button>
+                                </div>
                             </div>
                         </div>
                 }
                 </div>
+                <Confirmar
+                    aparecer={confirmado}
+                    onClose={fecharExcluir}
+                    onConfirm={deletarProduto}
+                />
             </section>
         </main>
     )

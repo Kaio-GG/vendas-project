@@ -8,8 +8,8 @@ const server = Router();
 
 server.post('/novo/venda', async (req:Request, res:Response) =>{
     try {
-        const {idProduto, idUsuario, desconto, data, descricao, qtd} = req.body;
-        const respostaBD:any = await novaVenda(idProduto, idUsuario, desconto, data, descricao, qtd);
+        const { idUsuario, desconto, data, descricao, qtd, nome, preco, gasto, liquido} = req.body;
+        const respostaBD:any = await novaVenda(idUsuario, desconto, data, qtd, nome, Number(preco), Number(gasto), Number(liquido), descricao);
         let msg:string = '';
         if(!respostaBD){
             msg = "Ocorreu um erro inesperado"
@@ -35,7 +35,7 @@ server.delete('/deletar/venda/:id', async (req:Request, res:Response) =>{
             msg = "Ocorreu um erro inesperado"
         }else if( 'affectedRows' in respostaBD){
             if (respostaBD.affectedRows == 1) {
-                msg = "Novo produto cadastrado com sucesso";
+                msg = "Deletado com sucesso";
             }
         }
         res.json(msg)

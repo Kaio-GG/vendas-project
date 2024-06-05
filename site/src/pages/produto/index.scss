@@ -167,4 +167,11 @@
                 border: #63096B 1px solid;
                 height: 50px;
            }
+           .div-btns{
+                display: flex;
+                flex-direction: row;
+                width: 20%;
+                align-items: center;
+                justify-content: space-between;
+           }
     }

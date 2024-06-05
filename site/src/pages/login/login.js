@@ -4,12 +4,17 @@ import {login, cadastrar } from '../../api/usuarioApi.js'
 import storage from 'local-storage';
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
+import LoadingBar from 'react-top-loading-bar'
+
+
 
 export default function Login(){
     const [mostrarLogin, setMostrarLogin] = useState(true);
     const [email, setEmail]= useState('');
     const [senha, setSenha] = useState('');
     const [nome, setNome] = useState('');
+    const [progress, setProgress] = useState(0)
+
     const Navigate = useNavigate();
 
 
@@ -35,7 +40,10 @@ export default function Login(){
          }
             storage('usuario', r.data);
             const id = storage('usuario').id
-            Navigate(`/novo/venda/1/${id}`)
+            setProgress(100)
+            setTimeout(() => {
+                Navigate(`/novo/venda/1/${id}`)
+            }, 900);
         }   
     }
 
@@ -43,6 +51,11 @@ export default function Login(){
 
     return(
         <main className='pg-login'>
+        <LoadingBar
+            color='#f11946'
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+        />
 
                 <div class="form">
                     {mostrarLogin === true ?

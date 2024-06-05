@@ -25,16 +25,29 @@ export default function Analise(){
                         </div>
                         <div className='form'>
                             <div className='btns'>
-                                <button>Mais vendidos</button>
-                                <button>Dia com mais vendas</button>
-                                <button onClick={() => setDirecao('lucro30dias')}>Lucro no ultimos 30 dias</button>
-                                <button onClick={() => setDirecao('lucro360dias')}>lucro no ultimos 360 dias</button>
-                                <button>Gasto de produção no ultimos 30 dias</button>
-                                <button>Gasto de produção no ultimos 360 dias</button>
+                                {direcao === 'historico' 
+                                    ?<button className='apertado' onClick={()=> setDirecao('historico')}>Historico</button>
+                                    :<button onClick={()=> setDirecao('historico')}>Historico</button>
+                                }
+                                {direcao === 'lucro30dias'  
+                                    ?<button className='apertado' onClick={() => setDirecao('lucro30dias')}>Lucro no ultimos 30 dias</button>
+                                    :<button onClick={() => setDirecao('lucro30dias')}>Lucro no ultimos 30 dias</button>
+                                }
+                                {direcao === 'lucro360dias'  
+                                    ?<button className='apertado' onClick={() => setDirecao('lucro360dias')}>Lucro no ultimos 360 dias</button>
+                                    :<button onClick={() => setDirecao('lucro360dias')}>Lucro no ultimos 360 dias</button>
+                                }
+                                {direcao === 'gasto30dias'  
+                                    ?<button className='apertado' onClick={() => setDirecao('gasto30dias')}>Gasto no ultimos 30 dias</button>
+                                    :<button onClick={() => setDirecao('gasto30dias')}>Gasto no ultimos 30 dias</button>
+                                }
+                                {direcao === 'gasto360dias'  
+                                    ?<button className='apertado' onClick={() => setDirecao('gasto360dias')}>Gasto no ultimos 360 dias</button>
+                                    :<button onClick={() => setDirecao('gasto360dias')}>Gasto no ultimos 360 dias</button>
+                                }
+                                
                             </div>
-                            <div className='btns'>
-                                <button onClick={()=> setDirecao('historico')}>Historico</button>
-                            </div>
+                        
                             <div className='org-info'>
                                 <MaisVendido fun={direcao}/>
                             </div>

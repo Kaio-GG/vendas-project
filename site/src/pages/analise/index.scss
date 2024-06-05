@@ -36,7 +36,8 @@
             display: flex;
             justify-content: space-between;
             flex-direction: row;
-            margin-top: 20px;   
+            margin-top: 20px;
+            width: 80%;   
         button{
             background-color: #48014e;
             border: none;
@@ -44,6 +45,10 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+        }
+        .apertado{
+            background-color: #1b1a1a;
+            border: 1px solid #fff;
         }
         }
         .linha-vertical{

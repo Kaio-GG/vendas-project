@@ -8,7 +8,7 @@ const server = Router();
 server.post('/novo/produto', async (req:Request, res:Response) =>{
     try {
         const {id , nome , valor , gasto , liquido, descricao} = req.body;
-        if(!id || !nome || !valor || !gasto || !liquido || !descricao){
+        if(!id || !nome || !valor || Number(gasto) < 0 || !liquido || !descricao){
             throw new Error('Preencha todos ous campos');
         }
         let respostaBD:any = await novoProduto(id,nome,valor,gasto,liquido,descricao);
@@ -31,10 +31,10 @@ server.post('/novo/produto', async (req:Request, res:Response) =>{
 server.put('/alterar/produto', async (req: Request, res: Response) =>{
     try {
         const {id, nome, preco ,liquido , gasto, descricao} = req.body;
-        if(!id || !nome || !preco || !gasto || !liquido || !descricao){
+        if(!id || !nome || !preco  || !liquido || !descricao || Number(gasto) < 0){
             throw new Error('Preencha todos ous campos');
         }
-        let respostaBD:any = await editarProduto(id, nome, preco, gasto, liquido , descricao);
+        let respostaBD:any = await editarProduto(id, nome, preco, Number(gasto), liquido , descricao);
         let msg:string = '';
         if(!respostaBD){
             msg = "Ocorreu um erro inesperado"
@@ -60,7 +60,7 @@ server.delete('/deletar/produto/:id', async (req:Request, res:Response) => {
             msg = "Ocorreu um erro inesperado"
         }else if( 'affectedRows' in respostaBD){
             if (respostaBD.affectedRows == 1) {
-                msg = "Novo produto cadastrado com sucesso";
+                msg = "Produto deletado com sucesso";
             }
         }
         res.json(msg)

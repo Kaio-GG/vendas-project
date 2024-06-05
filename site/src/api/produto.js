@@ -47,3 +47,12 @@ export async function alterarProduto(id,nome,preco,gasto,liquido,desc){
         console.log(err.message)
     }
 }
+
+export async function deletarProdutoApi(id){
+    try {
+        const r = await api.delete(`/deletar/produto/${id}`)
+        return r.data
+    } catch (err) {
+        console.log(err.message)
+    }
+}

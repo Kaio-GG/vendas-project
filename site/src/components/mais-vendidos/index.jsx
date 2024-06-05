@@ -1,19 +1,25 @@
 import './index.scss';
-import { historicoApi } from '../../api/analliseApi.js';
+import { historicoApi} from '../../api/analliseApi.js';
+import { excluirVendaApi} from '../../api/vendas.js'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Confirmacao from '../confirmarExclusao/index.jsx'; 
+import { toast } from 'react-toastify';
 
 export default function MaisVendido(props) {
     const [historico, setHistorico] = useState([]);
-    const [lucro, setLucro] = useState(0); 
-    const [historicoDias, setHistoricoDias] = useState([])
+    const [lucroGasto, setLucroGasto] = useState(0); 
+    const [historicoDias, setHistoricoDias] = useState([]);
+    const [itemFocus, setItemFocus] = useState(null); // Estado para rastrear o item focado
+    const [confirmado, setConfirmado] = useState(false); // Estado para mostrar a confirmação
+    const [vendaId, setVendaId] = useState(null); // Estado para armazenar o ID da venda a ser excluída
     const { id } = useParams();
 
     async function carregarHistorico() {
         try {
             const lista = await historicoApi(id);
             setHistorico(lista);
-            setHistoricoDias(lista)
+            setHistoricoDias(lista);
         } catch (err) {
             console.log(err.message);
         }
@@ -26,28 +32,31 @@ export default function MaisVendido(props) {
         const ano = data.getFullYear();
         return `${dia}/${mes}/${ano}`;
     }
-    useEffect(()=>{
-        carregarHistorico()
-    },[])
 
     useEffect(() => {
-        carregarHistorico()
+        carregarHistorico();
+    }, [id]);
+
+    useEffect(() => {
         if (props.fun === 'historico') {
-            setHistoricoDias(historico)
-        }
-        else if (props.fun === 'lucro30dias') {
-            LucroMes();
-        } else if (props.fun === 'lucro360dias'){
-            LucroAno()
+            setHistoricoDias(historico);
+        } else if (props.fun === 'lucro30dias') {
+            lucroContador(30);
+        } else if (props.fun === 'lucro360dias') {
+            lucroContador(360);
+        } else if (props.fun === 'gasto30dias') {
+            gastoContador(30);
+        } else if (props.fun === 'gasto360dias') {
+            gastoContador(360);
         }
     }, [props.fun]);
 
-    async function LucroMes() {
+    async function lucroContador(dias) {
         await carregarHistorico();
         let lista = [];
         let dataAtual = new Date();
         let data30DiasAtras = new Date();
-        data30DiasAtras.setDate(dataAtual.getDate() - 30);
+        data30DiasAtras.setDate(dataAtual.getDate() - dias);
         let contadorLucro = 0;
         for (let i = 0; i < historico.length; i++) {
             let dt = new Date(historico[i].data).getTime();
@@ -56,29 +65,53 @@ export default function MaisVendido(props) {
                 contadorLucro += Number(historico[i].liquido);
             }
         }
-        setLucro(contadorLucro);
+        setLucroGasto(contadorLucro);
         setHistoricoDias(lista);
-        return
     }
 
-    async function LucroAno() {
-        await carregarHistorico()
+    async function gastoContador(dias) {
+        await carregarHistorico();
         let lista = [];
         let dataAtual = new Date();
         let data360DiasAtras = new Date();
-        data360DiasAtras.setDate(dataAtual.getDate() - 360);
-        let contadorLucro = 0;
+        data360DiasAtras.setDate(dataAtual.getDate() - dias);
+        let contadorGasto = 0;
         for (let i = 0; i < historico.length; i++) {
             let dt = new Date(historico[i].data).getTime();
             if (dt >= data360DiasAtras) {
                 lista.push(historico[i]);
-                contadorLucro += Number(historico[i].liquido);
+                contadorGasto += Number(historico[i].gasto);
             }
         }
-        setLucro(contadorLucro);
+        setLucroGasto(contadorGasto);
         setHistoricoDias(lista);
-        return
     }
+
+    async function excluirVenda(id) {
+        try {
+            const r = await excluirVendaApi(id);
+            toast(r)
+            carregarHistorico()
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    function fecharExcluir(id) {
+        setVendaId(id);
+        setConfirmado(true);
+    }
+
+    function fecharExcluirFechar() {
+        setConfirmado(false);
+        setVendaId(null);
+    }
+
+    function confirmarExcluir() {
+        excluirVenda(vendaId);
+        setConfirmado(false);
+    }
+
     return (
         <main className='maisVendido'>
             <table>
@@ -91,26 +124,46 @@ export default function MaisVendido(props) {
                         <th>Quantidade</th>
                         <th>Data</th>
                         {(props.fun === 'lucro30dias' || props.fun === 'lucro360dias') && <th>Lucro Total</th>}
+                        {(props.fun === 'gasto30dias' || props.fun === 'gasto360dias') && <th>Gasto Total</th>}
+                        <td className='excluir'></td>
                     </tr>
                 </thead>
                 <tbody>
                     {historicoDias.length > 0 && historicoDias.map((prod, index) => (
-                        <tr key={index}>
+                        <tr
+                            key={index}
+                            onMouseEnter={() => setItemFocus(index)}
+                            onMouseLeave={() => setItemFocus(null)}
+                        >
                             <td>{prod.nome}</td>
                             <td>R$: {prod.preco}</td>
                             <td>R$: {prod.liquido}</td>
                             <td>R$: {prod.gasto}</td>
                             <td>{prod.qtd}</td>
                             {prod.data && <td>{formatarData(prod.data)}</td>}
-                            {(props.fun === 'lucro30dias' || props.fun === 'lucro360dias')  && (
+                            {(props.fun === 'lucro30dias' || props.fun === 'lucro360dias' || props.fun === 'gasto30dias' || props.fun === 'gasto360dias')  && (
                                 index === 0 
-                                    ? <td rowSpan={historico.length}>R$: {lucro}</td> 
+                                    ? <td rowSpan={historico.length}>R$: {lucroGasto}</td> 
                                     : <td></td>
                             )}
+                            <td className='excluir'>
+                                {itemFocus === index && (
+                                    <img
+                                        src='/assets/image/remove.svg'
+                                        alt=''
+                                        onClick={() => fecharExcluir(prod.id)}
+                                    />
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <Confirmacao 
+                aparecer={confirmado} 
+                onClose={fecharExcluirFechar} 
+                onConfirm={confirmarExcluir} 
+            />
         </main>
     );
 }

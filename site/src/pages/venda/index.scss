@@ -1,28 +1,33 @@
-.pg-venda{
+.pg-venda {
     display: flex;
     width: 100vw;
     height: 100vh;
     background-color: #161515;
     flex-direction: column;
     color: #fff;
-    h2{
+
+    h2 {
         font-family: "regular";
     }
-    .header{
+
+    .header {
         height: 10vh;
         width: 100%;
     }
-    .meio{
+
+    .meio {
         display: flex;
         flex-direction: row;
     }
-    .org-div-textarea{
+
+    .org-div-textarea {
         display: flex;
         flex-direction: column;
         height: 52%;
         justify-content: space-between;
     }
-    .fundo{
+
+    .fundo {
         display: flex;
         width: 95%;
         height: 90vh;
@@ -30,7 +35,8 @@
         align-items: center;
         flex-direction: column;
     }
-    .form{
+
+    .form {
         height: 80vh;
         width: 80%;
         display: flex;
@@ -39,27 +45,31 @@
         background: transparent;
         align-items: center;
     }
-    .formulario{
+
+    .formulario {
         height: 100%;
         width: 90%;
         display: flex;
         flex-direction: column;
     }
-    .linha-horizontal{
+
+    .linha-horizontal {
         width: 90%;
         height: 1%;
         background-color: #48014e;
         border-radius: 50px;
     }
 
-    .linha-vertical{
+    .linha-vertical {
         height: 50%;
         width: 1%;
         margin-right: 10px;
         border-radius: 50px;
         background-color: #48014e;
     }
-    .linha-nome{
+
+
+    .linha-nome {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -68,35 +78,50 @@
         height: 80px;
         margin-top: 10px;
     }
+
     .input {
         color: #48014e;
         border: 2px solid #48014e;
         border-radius: 5px;
         padding: 10px 25px;
         background: transparent;
-        max-width: 210px;
-        min-width: 210px;
+        width: 210px;
         color: #fff;
         color-scheme: white;
-       }
+    }
+    .select-venda{
+        color: #48014e;
+        border: 2px solid #48014e;
+        border-radius: 5px;
+        padding: 10px 25px;
+        background: transparent;
+        width: 260px;
+        color: #fff;
+        color-scheme: white;
+    }
 
-       .opcao-produto{
+    .opcao-produto {
         width: 400px;
-       }
-       option{
+    }
+
+    option {
         background-color: #161515;
         color: #fff;
         border: none;
         border-radius: 2px;
-       }
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            display: none;
-        }
-        input[type="date"]:focus {
-            background-color: transparent;
-        }
+    }
 
-    .inputs{
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background-color: #63096B;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    input[type="datetime-local"]:focus {
+        background-color: transparent;
+    }
+
+    .inputs {
         width: 80%;
         display: flex;
         flex-direction: row;
@@ -104,29 +129,36 @@
         align-items: center;
         margin-top: 10px;
         padding-left: 10%;
-       }
-
+    }
     
-    .textos{
+    .textos {
         display: flex;
-        align-items: center;
+        flex-direction: row;
+        align-items: flex-start;
         justify-content: space-between;
         width: 80%;
         height: 40%;
         padding-left: 10%;
+        margin-top: 5%;
     }
-    .botao-salvar{
+
+    .botao-salvar {
         display: flex;
         width: 95%;
         justify-content: flex-end;
         align-items: flex-start;
     }
-    textarea{
-        max-height: 100px;
-        min-height: 100px;
-        max-width: 200px;
-        min-width: 200px;
+
+    textarea {
+        height: 100px;
+        width: 210px;
+        border: 2px solid #48014e;
+        border-radius: 5px;
+        background: transparent;
+        color: #fff;
+        padding: 10px;
     }
+
     .button {
         --color: #63096B;
         display: flex;
@@ -148,9 +180,9 @@
         text-transform: uppercase;
         color: var(--color);
         z-index: 1;
-       }
-       
-       .button::before, .button::after {
+    }
+
+    .button::before, .button::after {
         content: '';
         width: 10px;
         height: 20px;
@@ -160,52 +192,57 @@
         z-index: -1;
         background-color: var(--color);
         transition: 1s ease;
-       }
-       
-       .button::before {
+    }
+
+    .button::before {
         top: -1em;
         left: -1em;
-       }
-       
-       .button::after {
+    }
+
+    .button::after {
         left: calc(100% + 1em);
         top: calc(100% + 1em);
-       }
-       
-       .button:hover::before, .button:hover::after {
+    }
+
+    .button:hover::before, .button:hover::after {
         height: 410px;
         width: 410px;
-       }
-       
-       .button:hover {
+    }
+
+    .button:hover {
         color: #fff;
-       }
-       .button:active {
+    }
+
+    .button:active {
         filter: brightness(.8);
-       }       
-       .historico{
-           display: flex;
-           flex-direction: column;
-           justify-content: flex-start;
-           height: 29%;
-           width: 90%;
-        }
-        h4{
-            margin-left: 20px;
-        }
-        .lista{
-             display: flex;
-             flex-direction: column;
-             justify-content: flex-start;
-             align-items: flex-start;
-             width: 90%;
-        }
-       .venda{
-            display: flex;
-            flex-direction: row;
-            width: 99%;
-            align-items: center;
-            justify-content: space-around;
-            height: 50px;
-       }
+    }
+
+    .historico {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 29%;
+        width: 90%;
+    }
+
+    h4 {
+        margin-left: 20px;
+    }
+
+    .lista {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 90%;
+    }
+
+    .venda {
+        display: flex;
+        flex-direction: row;
+        width: 99%;
+        align-items: center;
+        justify-content: space-around;
+        height: 50px;
+    }
 }

@@ -28,3 +28,16 @@ export async function cadastrar(nome, email, senha){
         console.log(err)
     }
 }
+
+export async function AlterarDadosApi(nome , email, id){
+    try {
+        const resp = await api.put('/atualizar/dados',{
+            nome: nome ,
+            email : email ,
+            id : id
+        })
+        return resp;
+    } catch (err) {
+        console.log(err.message)
+    }
+}

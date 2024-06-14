@@ -27,4 +27,15 @@ export async function cadastro(nome:string, email:string, senha:string) {
     return linha.affectedRows;
 }
 
+export async function alterarDados(id:number, nome:string, email:string) {
+    const comando = `
+    update tb_usuario 
+        set 
+        nm_usuario = ?,
+        ds_email = ?
+        where id_usuario = ?
+    `;
+    const [linha]:any = await(await conectado).execute(comando,[nome,email,id]);
+    return linha.affectedRows; 
+}
 

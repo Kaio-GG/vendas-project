@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { cadastro, login } from "../repositories/usuarioRepository";
+import { cadastro, login, alterarDados } from "../repositories/usuarioRepository";
 
 const server = Router();
 
@@ -33,7 +33,6 @@ server.post('/cadastro', async (req:Request, res:Response) => {
             resultado
         })
     } catch (error) {
-        console.error("Erro", error)
         return res.status(400).json({
             erro: "ocorreu um erro"
         })
@@ -41,7 +40,25 @@ server.post('/cadastro', async (req:Request, res:Response) => {
     
 })
 
+server.put('/atualizar/dados', async(req:Request, res:Response) =>{
+    try {
+        const { nome , email, id } = req.body;
+        
+        if(!nome || !email || !id){
+            return res.status(400).json('Preencha todos os campos')
+        }
+        const resultado:any = await alterarDados(id,nome,email);
+        if(resultado < 1 || !resultado){
+            return res.status(400).json('Ocorreu um erro!')
+        }
+        return res.status(202).json('Alterado com sucesso ')
 
+    } catch (err:any) {
+        return res.status(400).json({
+            erro: err.message
+        })
+    }
+})
 
 
 export default server;

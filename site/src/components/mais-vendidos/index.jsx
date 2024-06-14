@@ -48,6 +48,10 @@ export default function MaisVendido(props) {
             gastoContador(30);
         } else if (props.fun === 'gasto360dias') {
             gastoContador(360);
+        } else if (props.fun === 'valor30dias'){
+            valorContador(30)
+        } else if (props.fun === 'valor360dias'){
+            valorContador(360)
         }
     }, [props.fun]);
 
@@ -67,6 +71,26 @@ export default function MaisVendido(props) {
         }
         setLucroGasto(contadorLucro);
         setHistoricoDias(lista);
+        return
+    }
+    async function valorContador(dias) {
+        await carregarHistorico();
+        let lista = [];
+        let dataAtual = new Date();
+        let data30DiasAtras = new Date();
+        data30DiasAtras.setDate(dataAtual.getDate() - dias);
+        let contadorValor = 0;
+        for (let i = 0; i < historico.length; i++) {
+            let dt = new Date(historico[i].data).getTime();
+            if (dt >= data30DiasAtras) {
+                lista.push(historico[i]);
+                contadorValor += Number(historico[i].preco);
+            }
+        }
+        console.log(historico)
+        setLucroGasto(contadorValor);
+        setHistoricoDias(lista);
+        return
     }
 
     async function gastoContador(dias) {
@@ -85,6 +109,7 @@ export default function MaisVendido(props) {
         }
         setLucroGasto(contadorGasto);
         setHistoricoDias(lista);
+        return
     }
 
     async function excluirVenda(id) {
@@ -125,15 +150,18 @@ export default function MaisVendido(props) {
                         <th>Data</th>
                         {(props.fun === 'lucro30dias' || props.fun === 'lucro360dias') && <th>Lucro Total</th>}
                         {(props.fun === 'gasto30dias' || props.fun === 'gasto360dias') && <th>Gasto Total</th>}
-                        <td className='excluir'></td>
+                        {(props.fun === 'valor30dias' || props.fun === 'valor360dias') && <th>Valor Total</th>}
+                        
+                        <th className='excluir'></th>
                     </tr>
                 </thead>
                 <tbody>
                     {historicoDias.length > 0 && historicoDias.map((prod, index) => (
-                        <tr
-                            key={index}
-                            onMouseEnter={() => setItemFocus(index)}
-                            onMouseLeave={() => setItemFocus(null)}
+                    <tr
+                        className='lista'
+                        key={index}
+                        onMouseEnter={() => setItemFocus(index)}
+                        onMouseLeave={() => setItemFocus(null)}
                         >
                             <td>{prod.nome}</td>
                             <td>R$: {prod.preco}</td>
@@ -141,7 +169,7 @@ export default function MaisVendido(props) {
                             <td>R$: {prod.gasto}</td>
                             <td>{prod.qtd}</td>
                             {prod.data && <td>{formatarData(prod.data)}</td>}
-                            {(props.fun === 'lucro30dias' || props.fun === 'lucro360dias' || props.fun === 'gasto30dias' || props.fun === 'gasto360dias')  && (
+                            {(props.fun === 'lucro30dias' || props.fun === 'lucro360dias' || props.fun === 'gasto30dias' || props.fun === 'gasto360dias' || props.fun === 'valor360dias' || props.fun === 'valor30dias')  && (
                                 index === 0 
                                     ? <td rowSpan={historico.length}>R$: {lucroGasto}</td> 
                                     : <td></td>

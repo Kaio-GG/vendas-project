@@ -15,7 +15,7 @@ export async function historico(idUsuario:number) {
             dt_venda data 
             from tb_venda 
             where id_usuario = ?
-            order by dt_venda desc
+            order by id_venda desc
             `
         const [linhas]:any = await (await connection).query(comando,[idUsuario]);
         return linhas 

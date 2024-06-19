@@ -10,3 +10,12 @@ export async function historicoApi(id){
     }
 }
 
+export async function maisVendidoApi(id){
+    try {
+        const r = await api.get(`/maisvendido/${id}`);
+        return r.data 
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+

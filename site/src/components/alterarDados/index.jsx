@@ -13,7 +13,7 @@ export default function AlterarDados({ aoFechar }) {
         try {
             let r = await AlterarDadosApi(nome, email, id);
             toast(r.data);
-            aoFechar(); // Fecha o modal após salvar
+            aoFechar(); 
         } catch (err) {
             console.log(err);
         }

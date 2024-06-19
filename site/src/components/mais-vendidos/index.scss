@@ -20,6 +20,7 @@
             display: flex;
             flex-direction: row;
             width: 100%;
+            cursor: pointer;
         }
         .lista{
             height: 65px;
@@ -81,5 +82,13 @@
         tr:hover {
             background-color: #141414; 
         }
+    }
+    .organizar{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
     }
 }

@@ -48,13 +48,17 @@ export default function Analise(){
                                 
                             </div>
                             <div className='btns'>
-                            {direcao === 'valor360dias'  
+                                {direcao === 'valor360dias'  
                                     ?<button className='apertado' onClick={() => setDirecao('valor360dias')}>Valor total nos ultimos 360 dias</button>
                                     :<button onClick={() => setDirecao('valor360dias')}>Valor total nos ultimos 360 dias</button>
                                 }
                                 {direcao === 'valor30dias'  
                                     ?<button className='apertado' onClick={() => setDirecao('valor30dias')}>Valor total nos ultimos 30 dias</button>
                                     :<button onClick={() => setDirecao('valor30dias')}>Valor total nos ultimos 30 dias</button>
+                                }
+                                {direcao === 'maisvendido'
+                                        ?<button className='apertado' onClick={() => setDirecao('maisvendido')}>Mais Vendidos</button>
+                                        :<button onClick={() => setDirecao('maisvendido')}>Mais Vendidos</button>     
                                 }
                             </div>
                         

@@ -166,7 +166,7 @@ export default function Venda() {
                             />
                         </div>
                         <div className='textos'>
-                            <textarea type="" name="text" className="input" placeholder="O que é esse produto ou serviço" value={descricao} readOnly />
+                            <textarea type="" name="text" className="input" placeholder="O que é esse produto ou serviço" value={descricao} onChange={e => setDescricao(e.target.value)} />
                             <input
                                 type="number"
                                 name="text"

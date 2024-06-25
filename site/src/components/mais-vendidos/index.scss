@@ -12,6 +12,8 @@
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
+        text-align: left;
+        min-width: 100px;
         header{
             display: flex;
             width: 100%;
@@ -31,19 +33,6 @@
             align-items: center;
             justify-content: center;
  
-        }
-        tbody{
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-        }
-        thead{
-            padding: 10px;
-            display: flex;
-            width: 100%;
-            background-color: #1f1e1f;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
         }
         td{
             width: 23%;
@@ -90,5 +79,22 @@
         justify-content: center;
         align-items: center;
         z-index: 1;
+    }
+    @media (max-width: 500px) {
+        table {
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+
+            th, td {
+                padding: 5px; 
+                font-size: 12px;
+                min-width: 70px; 
+            }
+        }
+
+        .organizar {
+            flex-direction: column;
+        }
     }
 }

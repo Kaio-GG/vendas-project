@@ -1,36 +1,41 @@
-.pg-produto{
+.pg-produto {
     display: flex;
     width: 100%;
     background-color: #161515;
     flex-direction: column;
     color: #fff;
-    h2{
+
+    h2 {
         font-family: "regular";
     }
-    .header{
+
+    .header {
         height: 10vh;
         width: 100%;
     }
-    .meio{
+
+    .meio {
         display: flex;
         flex-direction: row;
     }
-    .fundo{
+
+    .fundo {
         display: flex;
         width: 90%;
         height: 90vh;
         flex-direction: column;
         align-items: center;
-        
     }
-    .linha-vertical{
+
+    .linha-vertical {
         height: 50%;
         width: 1%;
         margin-right: 10px;
         border-radius: 50px;
         background-color: #48014e;
     }
-    .linha-nome{
+
+    .linha-nome {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -39,11 +44,13 @@
         height: 80px;
         margin-top: 10px;
     }
-    .formulario{
+
+    .formulario {
         height: 100%;
         width: 90%;
     }
-    .org-produtos{
+
+    .org-produtos {
         margin-top: 30px;
         display: flex;
         width: 100%;
@@ -52,6 +59,7 @@
         flex-wrap: wrap;
         align-items: flex-start;
     }
+
     .card {
         --background: linear-gradient(to left, #63096B 0%, #48014e 100%);
         width: 190px;
@@ -61,63 +69,108 @@
         background: var(--background);
         margin-top: 3vh;
         margin-right: 1vw;
-       }
-       .card-info {
+    }
+
+    .card-info {
         --color: #181818;
         background: var(--color);
         display: flex;
         flex-direction: column;
-        align-items:  center;
+        align-items: center;
         justify-content: space-between;
         width: 100%;
         height: 100%;
         border-radius: .7rem;
+    }
+
+    .card-header {
+        display: flex;
+        width: 90%;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-family: 'regular';
+        padding: 10px;
+    }
+
+    .card-valores {
+        display: flex;
+        height: 50%;
+        flex-direction: column;
+        width: 90%;
+        font-size: 15px;
+        font-family: 'Roboto-bold';
+    }
+
+    .card-btn {
+        display: flex;
+        height: 15%;
+        align-items: flex-start;
+        width: 80%;
+        justify-content: space-between;
+
+        button {
+            border-radius: 10px;
+            border: 1px solid #48014e;
+            background-color: transparent;
+            width: 50%;
+            height: 80%;
+            color: #fff;
+            font-family: 'Roboto-regular';
+            cursor: pointer;
         }
-        .card-header{
-            display: flex;
+
+        button:hover {
+            background-color: #48014e;
+            transition: all 0.15s;
+        }
+    }
+
+    .imgNotFound {
+        width: 50vw;
+        height: 50vh;
+    }
+
+    .divimg {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (max-width: 500px) {
+        .fundo {
+            flex-direction: column;
+            height: auto; 
             width: 100%;
             align-items: center;
+        }
+
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            font-size: 20px;
-            font-family: 'regular';
+            width: 100%;
+        }
+
+        .org-produtos {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: nowrap; 
+            align-items: center;
+            width: 100%;
+            margin-top: 1em; 
+        }
+
+        .card {
+            width: 70%; 
+            margin-right: 0;
         }
         .card-valores{
-            display: flex;
-            height: 50%;
-            flex-direction: column;
-            width: 90%;
-            font-size: 15px;
-            font-family: 'Roboto-bold';
-        }
-        .card-btn{
-            display: flex;
-            height: 15%;
-            align-items: flex-start;
-            width: 80%;
-            justify-content: space-between;
-            button{
-                border-radius: 10px;
-                border: 1px solid #48014e;
-                background-color: transparent ;
-                width: 50%;
-                height: 80%;
-                color: #fff;
-                font-family: 'Roboto-regular';
-                cursor: pointer;
-            }
-            button:hover{
-                background-color: #48014e;
-                transition: all 0.15s;
-            }
-        } 
-        .imgNotFound{
-            width: 50vw;
-            height: 50vh;
-        }  
-        .divimg{
-            display: flex;
-            width: 100%;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
+    }
 }

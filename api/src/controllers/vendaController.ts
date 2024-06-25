@@ -19,10 +19,16 @@ server.post('/novo/venda', async (req:Request, res:Response) =>{
             }
         }
         res.json(msg)
-    } catch (err:any) {
-        res.status(400).json({
-            erro: err
-        })
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            res.status(400).json({
+                erro: err.message
+            })
+        } else {
+            res.status(400).json({
+                erro: 'Ocorreu um erro inesperado'
+            })
+        }
     }
 })
 
@@ -39,10 +45,14 @@ server.delete('/deletar/venda/:id', async (req:Request, res:Response) =>{
             }
         }
         res.json(msg)
-    } catch (err:any) {
-        res.status(400).json({
-            erro: err
-        })
+    } catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 })
 

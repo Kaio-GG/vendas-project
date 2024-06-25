@@ -6,8 +6,7 @@ const server = Router();
 server.post("/login", async (req: Request, res: Response) => {
     try {
         const { senha, email } = req.body;
-        
-        console.log(email)
+  
         if (!email || !senha ) {
             return res.status(400).json({ message: "Todos os campos são obrigatórios." });
         }
@@ -16,9 +15,14 @@ server.post("/login", async (req: Request, res: Response) => {
             return res.status(202).json({mesage:" usuario pu senha invalidos" })
         }
         return res.status(200).json(resultado);
-    } catch (error) {
-        console.error("Erro:", error);
-        return res.status(500).json({ message: "Ocorreu um erro interno." });
+    } catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(401).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 });
 
@@ -32,10 +36,14 @@ server.post('/cadastro', async (req:Request, res:Response) => {
         return res.status(200).json({
             resultado
         })
-    } catch (error) {
-        return res.status(400).json({
-            erro: "ocorreu um erro"
-        })
+    } catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
     
 })
@@ -53,10 +61,14 @@ server.put('/atualizar/dados', async(req:Request, res:Response) =>{
         }
         return res.status(202).json('Alterado com sucesso ')
 
-    } catch (err:any) {
-        return res.status(400).json({
-            erro: err.message
-        })
+    } catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 })
 

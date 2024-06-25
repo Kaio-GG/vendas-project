@@ -21,10 +21,14 @@ server.post('/novo/produto', async (req:Request, res:Response) =>{
             }
         }
         res.json(msg)
-    } catch (err:any) {
-        res.status(400).json({
-            erro: err.message
-        })
+    } catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 })
 
@@ -44,10 +48,14 @@ server.put('/alterar/produto', async (req: Request, res: Response) =>{
             }
         }
         res.json(msg)
-    } catch (err:any) {
-        res.status(400).json({
-            erro: err.message
-        })
+    }catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 })
 
@@ -64,24 +72,32 @@ server.delete('/deletar/produto/:id', async (req:Request, res:Response) => {
             }
         }
         res.json(msg)
-    } catch (err:any) {
-        res.status(400).json({
-            erro: err.message
-        })
+    }catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 })
 
 
 
-server.get('/carregar/produto/:id', async (req:Request, resp:Response)=>{
+server.get('/carregar/produto/:id', async (req:Request, res:Response)=>{
     try {
         const {id} = req.params;
         const resposta = await carregarProduto(Number(id));
-        resp.send(resposta)
-    } catch (err:any) {
-        resp.status(400).json({
-            erro: err.message
-        })
+        res.send(resposta)
+    } catch (err:unknown) {
+        if(err instanceof Error){
+            res.status(400).json({
+                erro: err.message
+            })
+        }else{
+            res.status(400).json({erro: 'ocorreu um erro inesperado'})
+        }
     }
 })
 

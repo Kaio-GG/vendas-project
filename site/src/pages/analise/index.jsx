@@ -41,13 +41,13 @@ export default function Analise(){
                                     ?<button className='apertado' onClick={() => setDirecao('gasto30dias')}>Gasto no ultimos 30 dias</button>
                                     :<button onClick={() => setDirecao('gasto30dias')}>Gasto no ultimos 30 dias</button>
                                 }
+                                
+                            </div>
+                            <div className='btns'>
                                 {direcao === 'gasto360dias'  
                                     ?<button className='apertado' onClick={() => setDirecao('gasto360dias')}>Gasto no ultimos 360 dias</button>
                                     :<button onClick={() => setDirecao('gasto360dias')}>Gasto no ultimos 360 dias</button>
                                 }
-                                
-                            </div>
-                            <div className='btns'>
                                 {direcao === 'valor360dias'  
                                     ?<button className='apertado' onClick={() => setDirecao('valor360dias')}>Valor total nos ultimos 360 dias</button>
                                     :<button onClick={() => setDirecao('valor360dias')}>Valor total nos ultimos 360 dias</button>

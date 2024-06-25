@@ -174,4 +174,31 @@
                 align-items: center;
                 justify-content: space-between;
            }
+
+           @media(max-width: 500px){
+            .pg-novoProduto{
+            }
+            .fundo{
+                flex-direction: column;
+            }
+            .formulario{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .inputs{
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+            .input{
+                margin-bottom: 20px;
+            }
+            .textos{
+                flex-direction: column;
+            }
+            .botao-salvar{
+                flex-direction: column;
+            }
+        }
     }

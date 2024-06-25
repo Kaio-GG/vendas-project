@@ -132,7 +132,7 @@ export default function Venda() {
                         </div>
                         <div className='inputs'>
                             <select
-                                className="select-venda input"
+                                className="select-venda"
                                 placeholder="Qual venda foi feita"
                                 value={produtoSelecionado || ''}
                                 onChange={(e) => {

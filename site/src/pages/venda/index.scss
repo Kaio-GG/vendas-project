@@ -85,7 +85,7 @@
         border-radius: 5px;
         padding: 10px 25px;
         background: transparent;
-        width: 210px;
+        width: 15vw;
         color: #fff;
         color-scheme: white;
     }
@@ -245,4 +245,46 @@
         justify-content: space-around;
         height: 50px;
     }
+}
+
+
+@media (max-width: 575px) {
+    .pg-venda{
+        max-width: 100%;
+        max-height: 100%;
+        .cp-navegacao{
+           width: 50px;
+        }
+        .fundo{
+            display: flex;
+            flex-direction: column;
+            .formulario{
+                
+                flex-direction: column;
+                .inputs{
+                    flex-direction: column;
+                }
+                .textos{
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .input{
+                    width: 50vw;
+                    margin-bottom: 20px;
+                }
+                .select-venda{
+                    width: 240px;
+                    margin-bottom: 20px;
+                }
+                
+            }
+        }
+    }
+    option{
+        max-height: 50vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
 }

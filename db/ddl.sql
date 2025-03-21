@@ -25,14 +25,17 @@ foreign key (id_usuario) references tb_usuario(id_usuario)
 
 create table tb_venda(
 id_venda int primary key auto_increment,
-id_produto int,
 id_usuario int,
 ds_desconto decimal(2),
 dt_venda	date,
 ds_venda    varchar(200),
 ds_quantidade	int,
+nm_produto	varchar(200),
+vl_preco	decimal(2),
+vl_gasto	decimal(2),
+vl_liquido 	decimal(2),
+ds_descricao varchar(200),
 
-foreign key (id_produto) references tb_produto(id_produto),
 foreign key (id_usuario) references tb_usuario(id_usuario)
 
 );
